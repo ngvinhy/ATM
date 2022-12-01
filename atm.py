@@ -30,17 +30,17 @@ def atm(tk, password, tien, gioihanrut, changesodu, changehanmuc, stt, sodu_atm)
                         changehanmuc[stt] = gioihanrut
                         if gioihanrut == 0:
                             break
-                        q = str(input('Bạn có muốn tiếp tục giao dịch không: '))
-                        if q == 'Không' or q == 'Ko' or q == 'ko' or q == 'không' or q == 'k' or q == 'K':
-                            bienlai = str(input('Bạn có muốn nhận hóa đơn không: '))
-                            if bienlai == 'Có' or bienlai == 'có':
+                        q = str(input('Bạn có muốn tiếp tục giao dịch không? '))
+                        if q.lower() == 'không' or q.lower() == 'ko' or q.lower() == 'k':
+                            bienlai = str(input('Bạn có muốn nhận hóa đơn không? '))
+                            if bienlai.lower() == 'có':
                                 print(f'Chủ thẻ: {tk} \nSố tiền đã giao dịch: {ruttien} \nSố dư: {tien} VNĐ')
                                 break
-                            if bienlai == 'Không' or bienlai == 'Ko' or bienlai == 'ko' or bienlai == 'không' or bienlai == 'k' or bienlai == 'K':
+                            if bienlai.lower() == 'không' or bienlai.lower() == 'ko' or bienlai.lower() == 'k':
                                 break
                     else:
-                        q = str(input('Số tiền giao dịch phải là bội số của 50000, bạn có muốn tiếp tục giao dịch khác không: '))
-                        if q == 'Không' or q == 'Ko' or q == 'ko' or q == 'không' or q == 'k' or q == 'K':
+                        q = str(input('Số tiền giao dịch phải là bội số của 50000, bạn có muốn tiếp tục giao dịch khác không? '))
+                        if q.lower() == 'không' or q.lower() == 'ko' or q.lower() == 'k':
                             break
             else:
                 print('Bạn không có đủ tiền trong tài khoản, xin vui lòng thử lại')
