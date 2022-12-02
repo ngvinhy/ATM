@@ -1,46 +1,162 @@
-def atm(tk, password, tien, gioihanrut, changesodu, changehanmuc, stt, sodu_atm):
-    mapin = int(input('Hãy nhập mã PIN, nếu muốn ngừng sử dụng dịch vụ hãy nhập số 0: '))
-    k = 3
-    while True:
-        if mapin == 0:
+def atm(tk, password, tien, gioihan, changesodu, changehanmuc, stt, sodu_atm, pin):
+    giaodien = '***************'
+    dem = 1
+    mapin = int(input('MÃ PIN: '))
+    while dem <= 3:
+        if mapin == password:
             break
-        elif mapin != password:
-            k -= 1
-            if k == 0:
-                print('Bạn đã nhập sai mã PIN quá số lần quy định')
-                break
-            mapin = int(input(f'Xin vui lòng nhập lại mã PIN, bạn còn {k} lần: '))
+        if dem == 3:
+            print(giaodien.center(39))
+            print('   SAI MÃ PIN QUÁ SỐ LẦN QUY ĐỊNH!!!\nTHẺ CỦA BẠN SẼ BỊ KHÓA TRONG ÍT PHÚT!!!')
+            print(giaodien.center(39))
+            exit()
         else:
-            print(f'Chủ thẻ: {tk} \nSố dư: {tien} VNĐ \nHạn mức giao dịch: {gioihanrut} VNĐ')
-            ruttien = int(input('Hãy nhập số tiền cần rút: '))
-            if ruttien == 0:
+            mapin = int(input(f'MÃ PIN KHÔNG HỢP LỆ (CÒN {3-dem} LẦN THỬ): '))
+            dem += 1
+    print(giaodien.center(27))
+    print('BẠN ĐÃ ĐĂNG NHẬP THÀNH CÔNG')
+    print(giaodien.center(27))
+    while True:
+        print('*1. Tra cứu tài khoản\n*2. Rút tiền\n*3. Chuyển tiền\n*4. Thay đổi mã PIN\n*0. Thoát')
+        chucnang = str(input('CHỌN CHỨC NĂNG BẠN MUỐN SỬ DỤNG: '))
+        if chucnang == '1':
+            print(giaodien.center(27))
+            print(f'CHỦ THẺ: {tk} \nSỐ DƯ: {tien} VNĐ \nHẠN MỨC GIAO DỊCH: {gioihan} VNĐ')
+            print(giaodien.center(27))
+            q = str(input('BẠN CÓ MUỐN TIẾP TỤC SỬ DỤNG DỊCH VỤ KHÔNG?\n*1. Có\n*2. Không\nChọn: '))
+            if q == '2':
                 break
+        elif chucnang == '2':
+            ruttien = int(input('NHẬP SỐ TIỀN CẦN RÚT: '))
+            if ruttien <= 0:
+                print(giaodien.center(42))
+                print('SỐ TIỀN KHÔNG HỢP LỆ, XIN VUI LÒNG THỬ LẠI')
+                print(giaodien.center(42))
             elif ruttien > sodu_atm[0]:
-                print('ATM không đủ tiền thực hiện giao dịch, xin vui lòng thử lại')
+                print(giaodien.center(60))
+                print('ATM KHÔNG ĐỦ SỐ DƯ THỰC HIỆN GIAO DỊCH, XIN VUI LÒNG THỬ LẠI')
+                print(giaodien.center(60))
             elif ruttien <= tien:
-                if gioihanrut < ruttien:
-                    print('Số tiền rút vượt quá hạn mức giao dịch, xin vui lòng thử lại')
+                if gioihan < ruttien:
+                    print(giaodien.center(56))
+                    print('SỐ TIỀN VƯỢT QUÁ HẠN MỨC GIAO DỊCH, XIN VUI LÒNG THỬ LẠI')
+                    print(giaodien.center(56))
                 else:
                     if ruttien % 50000 == 0:
                         tien = tien - ruttien
                         changesodu[stt] = tien
                         sodu_atm[0] -= ruttien
-                        print(f'Bạn đã rút thành công {ruttien} VNĐ \nSố dư: {tien} VNĐ')
-                        gioihanrut = gioihanrut - ruttien
-                        changehanmuc[stt] = gioihanrut
-                        if gioihanrut == 0:
+                        gioihan = gioihan - ruttien
+                        changehanmuc[stt] = gioihan
+                        if gioihan == 0:
+                            print(giaodien.center(43))
+                            print('HẠN MỨC GIAO DỊCH TRONG NGÀY CỦA BẠN ĐÃ HẾT')
+                            print(giaodien.center(43))
                             break
-                        q = str(input('Bạn có muốn tiếp tục giao dịch không? '))
-                        if q.lower() == 'không' or q.lower() == 'ko' or q.lower() == 'k':
-                            bienlai = str(input('Bạn có muốn nhận hóa đơn không? '))
-                            if bienlai.lower() == 'có':
-                                print(f'Chủ thẻ: {tk} \nSố tiền đã giao dịch: {ruttien} \nSố dư: {tien} VNĐ')
+                        bienlai = str(input('BẠN CÓ MUỐN NHẬN HÓA ĐƠN KHÔNG?\n*1. Có\n*2. Không\nChọn: '))
+                        if bienlai == '1':
+                            q = str(input('BẠN CÓ MUỐN TIẾP TỤC SỬ DỤNG DỊCH VỤ KHÔNG?\n*1. Có\n*2. Không\nChọn: '))
+                            if q == '1':
+                                print(giaodien.center(27))
+                                print(f'CHỦ THẺ: {tk}\nSỐ TIỀN ĐÃ RÚT: {ruttien} VNĐ\nSỐ DƯ: {tien} VNĐ')
+                                print(giaodien.center(27))
+                            if q == '2':
+                                print(giaodien.center(27))
+                                print(f'CHỦ THẺ: {tk}\nSỐ TIỀN ĐÃ RÚT: {ruttien} VNĐ\nSỐ DƯ: {tien} VNĐ')
+                                print(giaodien.center(27))
                                 break
-                            if bienlai.lower() == 'không' or bienlai.lower() == 'ko' or bienlai.lower() == 'k':
+                        elif bienlai == '2':
+                            q = str(input('BẠN CÓ MUỐN TIẾP TỤC SỬ DỤNG DỊCH VỤ KHÔNG?\n*1. Có\n*2. Không\nChọn: '))
+                            if q == '2':
+                                print(giaodien.center(48))
+                                print('GIAO DỊCH HOÀN THÀNH, XIN VUI LÒNG ĐỢI NHẬN TIỀN')
+                                print(giaodien.center(48))
                                 break
                     else:
-                        q = str(input('Số tiền giao dịch phải là bội số của 50000, bạn có muốn tiếp tục giao dịch khác không? '))
-                        if q.lower() == 'không' or q.lower() == 'ko' or q.lower() == 'k':
-                            break
+                        print(giaodien.center(68))
+                        print('SỐ TIỀN GIAO DỊCH PHẢI LÀ BỘI SỐ CỦA 50000 VNĐ, XIN VUI LÒNG THỬ LẠI')
+                        print(giaodien.center(68))
             else:
-                print('Bạn không có đủ tiền trong tài khoản, xin vui lòng thử lại')
+                print(giaodien.center(36))
+                print('SỐ DƯ KHÔNG ĐỦ, XIN VUI LÒNG THỬ LẠI')
+                print(giaodien.center(36))
+        elif chucnang == '3':
+            stk = int(input('NHẬP SỐ TÀI KHOẢN BẠN MUỐN CHUYỂN TIỀN: '))
+            chuyentien = int(input('NHẬP SỐ TIỀN CẦN CHUYỂN: '))
+            if chuyentien <= 0:
+                print(giaodien.center(42))
+                print('SỐ TIỀN KHÔNG HỢP LỆ, XIN VUI LÒNG THỬ LẠI')
+                print(giaodien.center(42))
+            elif chuyentien > sodu_atm[0]:
+                print(giaodien.center(60))
+                print('ATM KHÔNG ĐỦ SỐ DƯ THỰC HIỆN GIAO DỊCH, XIN VUI LÒNG THỬ LẠI')
+                print(giaodien.center(60))
+            elif chuyentien <= tien:
+                if gioihan < chuyentien:
+                    print(giaodien.center(56))
+                    print('SỐ TIỀN VƯỢT QUÁ HẠN MỨC GIAO DỊCH, XIN VUI LÒNG THỬ LẠI')
+                    print(giaodien.center(56))
+                else:
+                    if chuyentien % 50000 == 0:
+                        tien = tien - chuyentien
+                        changesodu[stt] = tien
+                        sodu_atm[0] -= chuyentien
+                        gioihan = gioihan - chuyentien
+                        changehanmuc[stt] = gioihan
+                        if gioihan == 0:
+                            print(giaodien.center(43))
+                            print('HẠN MỨC GIAO DỊCH TRONG NGÀY CỦA BẠN ĐÃ HẾT')
+                            print(giaodien.center(43))
+                            break
+                        bienlai = str(input('BẠN CÓ MUỐN NHẬN HÓA ĐƠN KHÔNG?\n*1. Có\n*2. Không\nChọn: '))
+                        if bienlai == '1':
+                            q = str(input('BẠN CÓ MUỐN TIẾP TỤC SỬ DỤNG DỊCH VỤ KHÔNG?\n*1. Có\n*2. Không\nChọn: '))
+                            if q == '1':
+                                print(giaodien.center(27))
+                                print(f'CHỦ THẺ: {tk}\nĐÃ CHUYỂN {chuyentien} VNĐ ĐẾN STK: {stk}\nSỐ DƯ: {tien} VNĐ')
+                                print(giaodien.center(27))
+                            if q == '2':
+                                print(giaodien.center(27))
+                                print(f'CHỦ THẺ: {tk}\nĐÃ CHUYỂN {chuyentien} VNĐ ĐẾN STK: {stk}\nSỐ DƯ: {tien} VNĐ')
+                                print(giaodien.center(27))
+                                break
+                        elif bienlai == '2':
+                            q = str(input('BẠN CÓ MUỐN TIẾP TỤC SỬ DỤNG DỊCH VỤ KHÔNG?\n*1. Có\n*2. Không\nChọn: '))
+                            if q == '2':
+                                print(giaodien.center(48))
+                                print('GIAO DỊCH HOÀN THÀNH')
+                                print(giaodien.center(48))
+                                break
+                    else:
+                        print(giaodien.center(68))
+                        print('SỐ TIỀN GIAO DỊCH PHẢI LÀ BỘI SỐ CỦA 50000 VNĐ, XIN VUI LÒNG THỬ LẠI')
+                        print(giaodien.center(68))
+            else:
+                print(giaodien.center(36))
+                print('SỐ DƯ KHÔNG ĐỦ, XIN VUI LÒNG THỬ LẠI')
+                print(giaodien.center(36))
+        elif chucnang == '4':
+            oldpin = int(input('NHẬP MÃ PIN CŨ: '))
+            if oldpin == pin[stt]:
+                newpin = int(input('NHẬP MÃ PIN MỚI: '))
+                newpin1 = int(input('NHẬP LẠI MÃ PIN MỚI: '))
+                if newpin == newpin1:
+                    pin[stt] = newpin
+                    print(giaodien.center(80))
+                    print('BẠN ĐÃ THAY ĐỔI THÀNH CÔNG MÃ PIN, XIN VUI LÒNG ĐĂNG NHẬP LẠI ĐỂ SỬ DỤNG DỊCH VỤ')
+                    print(giaodien.center(80))
+                    break
+                else:
+                    print(giaodien.center(49))
+                    print('MÃ PIN MỚI KHÔNG TRÙNG KHỚP, XIN VUI LÒNG THỬ LẠI')
+                    print(giaodien.center(49))
+            else:
+                print(giaodien.center(32))
+                print('SAI MÃ PIN, XIN VUI LÒNG THỬ LẠI')
+                print(giaodien.center(32))
+        elif chucnang == '0':
+            break
+        else:
+            print(giaodien.center(44))
+            print('CHỨC NĂNG KHÔNG HỢP LỆ, XIN VUI LÒNG THỬ LẠI')
+            print(giaodien.center(44))
