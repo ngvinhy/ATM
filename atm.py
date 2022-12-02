@@ -38,9 +38,9 @@ def atm(tk, password, tien, gioihan, changesodu, changehanmuc, stt, sodu_atm, pi
                 print(giaodien.center(60))
             elif ruttien <= tien:
                 if gioihan < ruttien:
-                    print(giaodien.center(56))
-                    print('SỐ TIỀN VƯỢT QUÁ HẠN MỨC GIAO DỊCH, XIN VUI LÒNG THỬ LẠI')
-                    print(giaodien.center(56))
+                    print(giaodien.center(67))
+                    print('SỐ TIỀN VƯỢT QUÁ HẠN MỨC GIAO DỊCH TRONG NGÀY, XIN VUI LÒNG THỬ LẠI')
+                    print(giaodien.center(67))
                 else:
                     if ruttien % 50000 == 0:
                         tien = tien - ruttien
@@ -52,7 +52,6 @@ def atm(tk, password, tien, gioihan, changesodu, changehanmuc, stt, sodu_atm, pi
                             print(giaodien.center(43))
                             print('HẠN MỨC GIAO DỊCH TRONG NGÀY CỦA BẠN ĐÃ HẾT')
                             print(giaodien.center(43))
-                            break
                         bienlai = str(input('BẠN CÓ MUỐN NHẬN HÓA ĐƠN KHÔNG?\n*1. Có\n*2. Không\nChọn: '))
                         if bienlai == '1':
                             q = str(input('BẠN CÓ MUỐN TIẾP TỤC SỬ DỤNG DỊCH VỤ KHÔNG?\n*1. Có\n*2. Không\nChọn: '))
@@ -93,9 +92,9 @@ def atm(tk, password, tien, gioihan, changesodu, changehanmuc, stt, sodu_atm, pi
                 print(giaodien.center(60))
             elif chuyentien <= tien:
                 if gioihan < chuyentien:
-                    print(giaodien.center(56))
-                    print('SỐ TIỀN VƯỢT QUÁ HẠN MỨC GIAO DỊCH, XIN VUI LÒNG THỬ LẠI')
-                    print(giaodien.center(56))
+                    print(giaodien.center(67))
+                    print('SỐ TIỀN VƯỢT QUÁ HẠN MỨC GIAO DỊCH TRONG NGÀY, XIN VUI LÒNG THỬ LẠI')
+                    print(giaodien.center(67))
                 else:
                     if chuyentien % 50000 == 0:
                         tien = tien - chuyentien
@@ -107,7 +106,6 @@ def atm(tk, password, tien, gioihan, changesodu, changehanmuc, stt, sodu_atm, pi
                             print(giaodien.center(43))
                             print('HẠN MỨC GIAO DỊCH TRONG NGÀY CỦA BẠN ĐÃ HẾT')
                             print(giaodien.center(43))
-                            break
                         bienlai = str(input('BẠN CÓ MUỐN NHẬN HÓA ĐƠN KHÔNG?\n*1. Có\n*2. Không\nChọn: '))
                         if bienlai == '1':
                             q = str(input('BẠN CÓ MUỐN TIẾP TỤC SỬ DỤNG DỊCH VỤ KHÔNG?\n*1. Có\n*2. Không\nChọn: '))
