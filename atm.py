@@ -17,6 +17,11 @@ def atm(tk, password, tien, gioihan, changesodu, changehanmuc, stt, sodu_atm, pi
     print('BẠN ĐÃ ĐĂNG NHẬP THÀNH CÔNG')
     print(header.center(27))
     while True:
+        if sodu_atm[0] <= 0:
+            print(header.center(42))
+            print('SỐ DƯ ATM ĐÃ HẾT, XIN VUI LÒNG THỬ LẠI SAU')
+            print(header.center(42))
+            break
         print('*1. Tra cứu tài khoản\n*2. Rút tiền\n*3. Chuyển tiền\n*4. Thay đổi mã PIN\n*0. Thoát')
         chucnang = str(input('CHỌN CHỨC NĂNG BẠN MUỐN SỬ DỤNG: '))
         if chucnang == '1':
