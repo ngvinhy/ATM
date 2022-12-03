@@ -9,7 +9,7 @@ def atm(tk, password, tien, gioihan, changesodu, changehanmuc, stt, sodu_atm, pi
             print(header.center(39))
             print('   SAI MÃ PIN QUÁ SỐ LẦN QUY ĐỊNH!!!\nTHẺ CỦA BẠN SẼ BỊ KHÓA TRONG ÍT PHÚT!!!')
             print(header.center(39))
-            exit()
+            break
         else:
             mapin = int(input(f'MÃ PIN KHÔNG HỢP LỆ (CÒN {3-dem} LẦN THỬ): '))
             dem += 1
